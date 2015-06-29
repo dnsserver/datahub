@@ -21,6 +21,7 @@ Contents:
    Client API
    Core Apps
    Core URLs
+   code
 
 
 **NOTE:** pull requests must include appropriate `Sphinx <http://sphinx-doc.org>`__ documentation.

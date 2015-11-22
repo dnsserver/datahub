@@ -45,7 +45,9 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
+htmlcov/
 nosetests.xml
+@test_*
 
 # Translations
 *.mo
@@ -82,4 +84,9 @@ DerivedData
 .idea/
 # Pods - for those of you who use CocoaPods
 Pods
+
+# Vagrant
 .vagrant
+
+# Developer Specific
+devnotes.txt

@@ -268,29 +268,6 @@ def repo_cards(request, repo_base, repo):
         content_type="application/json")
 
 @login_required
-def repo_dashboards(request, repo_base, repo):
-  try:
-    login = get_login(request)
-
-    res = DataHubManager.has_repo_privilege(login, repo_base, repo, 'USAGE')
-    if not (res and res['tuples'][0][0]):
-      raise Exception('Access denied. Missing required privileges.')
-    
-    res = {
-        'login': get_login(request),
-        'repo_base': repo_base,
-        'repo': repo,
-        'dashboards': []}
-    
-    res.update(csrf(request))
-    return render_to_response("repo-browse-dashboards.html", res)
-  
-  except Exception, e:
-    return HttpResponse(json.dumps(
-        {'error': str(e)}),
-        content_type="application/json")
-
-@login_required
 def repo_create(request, repo_base):
   try:
     login = get_login(request)
@@ -411,14 +388,12 @@ def table(request, repo_base, repo, table):
     login = get_login(request)
     dh_table_name = '%s.%s.%s' %(repo_base, repo, table)
     
-    ''' 
     res = DataHubManager.has_table_privilege(
         login, repo_base, dh_table_name, 'SELECT')
     
     if not (res and res['tuples'][0][0]):
       raise Exception('Access denied. Missing required privileges.')
 
-    '''
     manager = DataHubManager(user=repo_base)
     res = manager.execute_sql(
         query='EXPLAIN SELECT * FROM %s' %(dh_table_name))    
@@ -643,6 +618,12 @@ def file_delete(request, repo_base, repo, file_name):
 @login_required
 def file_download(request, repo_base, repo, file_name):
   try:
+    login = get_login(request)
+    res = DataHubManager.has_repo_privilege(login, repo_base, repo, 'USAGE')
+    
+    if not (res and res['tuples'][0][0]):
+      raise Exception('Access denied. Missing required privileges.')
+
     repo_dir = '/user_data/%s/%s' %(repo_base, repo)
     file_path = '%s/%s' %(repo_dir, file_name)
     response = HttpResponse(

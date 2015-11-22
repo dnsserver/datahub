@@ -46,20 +46,8 @@ Create Repos, Table
 
 
 | ``url(r'^create/(\w+)/(\w+)/card/?$', 'browser.views.card_create')``
-| create a card (Cards store queries at the web app level, without creating a view. In this way, they're database independent.)
-
-| ``url(r'^create/(\w+)/(\w+)/dashboard/(\w+)/?$', 'browser.views.dashboard_create')``
-| This function doesn't exist. I'm not sure what's going on here.
-
-| ``url(r'^create/organization/(\w+)/?$', 'browser.views.organization_create')``
-| This function doesn't exist either.
-
-
-| ``url(r'^create/(\w+)/group/(\w+)/?$', 'browser.views.group_create')``
-| DNE
-
-| ``url(r'^create/app/(\w+)/?$', 'browser.views.app_create')``
-| DNE
+| create a card (Cards store queries at the web app level, without creating a view.
+In this way, they're database independent.)
 
 | ``url(r'^create/annotation/?$', 'browser.views.create_annotation')``
 | Users create annotations to describe tables views and cards for future reference
@@ -76,12 +64,6 @@ Browse
 
 | ``url(r'^browse/(\w+)/(\w+)/card/(.+)/?$', 'browser.views.card')``
 | View a query that was previously saved in datahub (whtout a view)
-
-| ``url(r'^browse/(\w+)/(\w+)/dashboard/(\w+)/?$', 'browser.views.dashboard')``
-| DNE
-
-| ``url(r'^browse/(\w+)/(\w+)/?$', 'browser.views.repo')``
-| DNE 
 
 | ``url(r'^browse/(\w+)/(\w+)/tables/?$', 'browser.views.repo_tables')``
 | Show a list of tables, views, and cards associated with a repo
@@ -110,9 +92,6 @@ Delete
 | ``url(r'^delete/(\w+)/(\w+)/card/(\w+)/?$', 'browser.views.card_delete')``
 | Delete a card
 
-| ``url(r'^delete/(\w+)/(\w+)/dashboard/(\w+)/?$', 'browser.views.dashboard_delete')``
-| Delete a dashboard
-
 | ``url(r'^delete/(\w+)/(\w+)/file/([\w\d\-\.]+)/?$', 'browser.views.file_delete')``
 | Delete a file
 
@@ -122,23 +101,17 @@ Export
 | ``url(r'^export/(\w+)/(\w+)/table/(\w+)/?$', 'browser.views.table_export')``
 | Export a table as a CSV
 
-| ``url(r'^export/(\w+)/(\w+)/query/?$', 'browser.views.query_export')``
-| DNE
-
-| ``url(r'^export/(\w+)/(\w+)/card/(\w+)/?$', 'browser.views.card_export')``
-| DNE
-
 Special File Operations
 -----------------------
 
 | ``url(r'^upload/(\w+)/(\w+)/file/?$', 'browser.views.file_upload')``
-| DNE
+| Upload a file to datahub, for processing
 
 | ``url(r'^import/(\w+)/(\w+)/file/([\w\d\-\.]+)', 'browser.views.file_import')``
-| DNE
+| Import a file's data
 
 | ``url(r'^download/(\w+)/(\w+)/file/([\w\d\-\.]+)', 'browser.views.file_download')``
-| DNE
+| Download a file previously uploaded to datahub
 
 Settings
 --------
@@ -146,22 +119,18 @@ Settings
 | ``url(r'^settings/(\w+)/(\w+)/?$', 'browser.views.repo_settings')``
 | Manage repository settings, including collaborators
 
-| ``url(r'^settings/(\w+)/?$', 'browser.views.user_settings')``
-| DNE
-
 Collaborators
 -------------
 
 | ``url(r'^collaborator/repo/(\w+)/(\w+)/add/?$', 'browser.views.repo_collaborators_add')``
 | Add a collaborator to a repo
 
-| url(r'^collaborator/repo/(\w+)/(\w+)/remove/(\w+)/?$', 'browser.views.``repo_collaborators_remove')``
+| ``url(r'^collaborator/repo/(\w+)/(\w+)/remove/(\w+)/?$', 'browser.views.``repo_collaborators_remove')``
 | Remove a collaborator from a repo
 
 
 Client Apps
 -----------
-
 | ``url(r'^developer/apps/?$', 'browser.views.apps')``
 | View a list of application tokens that the user has created
 
